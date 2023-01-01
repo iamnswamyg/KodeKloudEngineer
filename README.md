@@ -282,3 +282,116 @@ sudo su -
 adduser javed
 chage -E 2021-04-15 javed    
 chage -l javed   
+
+Task 16:
+The Nautilus system admins team has prepared scripts to automate several day-to-day tasks. They want them to be deployed on all app servers in Stratos DC on a set schedule. Before that they need to test similar functionality with a sample cron job. Therefore, perform the steps below:
+a. Install cronie package on all Nautilus app servers and start crond service.
+b. Add a cron */5 * * * * echo hello > /tmp/cron_text for root user.
+
+ssh tony@stapp01
+sudo su -
+yum install cronie -y
+systemctl start crond.service
+systemctl status crond.service
+crontab -e
+*/5 * * * * echo hello > /tmp/cron_text
+crontab -l
+ll /tmp/
+
+ssh steve@stapp02
+sudo su -
+yum install cronie -y
+systemctl start crond.service
+systemctl status crond.service
+crontab -e
+*/5 * * * * echo hello > /tmp/cron_text
+crontab -l
+ll /tmp/
+
+
+ssh banner@stapp03
+sudo su -
+yum install cronie -y
+systemctl start crond.service
+systemctl status crond.service
+crontab -e
+*/5 * * * * echo hello > /tmp/cron_text
+crontab -l
+ll /tmp/
+
+
+Task 17:
+The system admins team of xFusionCorp Industries has set up some scripts on jump host that run on regular intervals and perform operations on all app servers in Stratos Datacenter. To make these scripts work properly we need to make sure the thor user on jump host has password-less SSH access to all app servers through their respective sudo users (i.e tony for app server 1). Based on the requirements, perform the following:
+Set up a password-less authentication from user thor on jump host to all app servers through their respective sudo users.
+
+whoami
+ssh-keygen -t rsa
+ssh-copy-id  tony@stapp01
+ssh-copy-id  steve@stapp02
+ssh-copy-id  banner@stapp03
+ssh tony@stapp01
+whoami
+exit
+ssh steve@stapp02
+whoami
+exit
+ssh banner@stapp03
+whoami
+exit
+
+Task 18:
+After doing some security audits of servers, xFusionCorp Industries security team has implemented some new security policies. One of them is to disable direct root login through SSH.
+Disable direct SSH root login on all app servers in Stratos Datacenter.
+
+ssh tony@stapp01
+sudo su -
+vi /etc/ssh/sshd_config
+#PermitRootLogin yes -> PermitRootLogin no
+cat /etc/ssh/sshd_config | grep PermitRootLogin
+systemctl restart sshd
+
+ssh steve@stapp02
+sudo su -
+vi /etc/ssh/sshd_config
+#PermitRootLogin yes -> PermitRootLogin no
+cat /etc/ssh/sshd_config | grep PermitRootLogin
+systemctl restart sshd
+
+ssh banner@stapp03
+sudo su -
+vi /etc/ssh/sshd_config
+#PermitRootLogin yes -> PermitRootLogin no
+cat /etc/ssh/sshd_config | grep PermitRootLogin
+systemctl restart sshd
+
+Task 19:
+There was some users data copied on Nautilus App Server 1 at /home/usersdata location by the Nautilus production support team in Stratos DC. Later they found that they mistakenly mixed up different user data there. Now they want to filter out some user data and copy it to another location. Find the details below:
+On App Server 1 find all files (not directories) owned by user javed inside /home/usersdata directory and copy them all while keeping the folder structure (preserve the directories path) to /news directory.
+
+ssh tony@stapp01
+sudo su -
+ll /home/usersdata/
+ll /news/
+find /home/usersdata/ -type f -user javed -exec cp --parents {} /news \;
+ll /news/home/usersdata/
+
+Task 20:
+The system admin team of xFusionCorp Industries has noticed an issue with some servers in Stratos Datacenter where some of the servers are not in sync w.r.t time. Because of this, several application functionalities have been impacted. To fix this issue the team has started using common/standard NTP servers. They are finished with most of the servers except App Server 3. Therefore, perform the following tasks on this server:
+Install and configure NTP server on App Server 3.
+Add NTP server 3.europe.pool.ntp.org in NTP configuration on App Server 3.
+Please do not try to start/restart/stop ntp service, as we already have a restart for this service scheduled for tonight and we don't want these changes to be applied right now.
+
+ssh banner@stapp03
+sudo su -
+rpm -qa |grep ntp
+yum install -y ntp
+rpm -qa |grep ntp
+vi /etc/ntp.conf
+[server 3.europe.pool.ntp.org]
+cat /etc/ntp.conf |grep europe.pool
+ntpstat
+systemctl status ntpd
+systemctl enable ntpd
+systemctl start  ntpd
+systemctl status ntpd
+ntpstat
