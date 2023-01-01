@@ -111,9 +111,9 @@ sestatus
 cat /etc/selinux/config | grep SELINUX
 vi /etc/selinux/config
 
-# SELINUX= can take one of these three values:
+#SELINUX= can take one of these three values:
 SELINUX=disabled
-# SELINUXTYPE= can take one of three values:
+#SELINUXTYPE= can take one of three values:
 SELINUXTYPE=targeted
 
 sestatus
@@ -230,4 +230,55 @@ exit
 exit
 
 Task 13:
+The system admins team of xFusionCorp Industries has set up a new tool on all app servers, as they have a requirement to create a service user account that will be used by that tool. They are finished with all apps except for App Server 1 in Stratos Datacenter.
+Create a user named mark in App Server 1 without a home directory.
 
+ssh tony@stapp01
+sudo su -
+id mark
+cat /etc/passwd |grep mark
+useradd -M mark
+id mark
+cat /etc/passwd |grep mark
+ll /home
+
+Task 14:
+New tools have been installed on the app server in Stratos Datacenter. Some of these tools can only be managed from the graphical user interface. Therefore, there are requirements for these app servers.
+On all App servers in Stratos Datacenter change the default runlevel so that they can boot in GUI (graphical user interface) by default. Please do not try to reboot these servers
+
+ssh tony@stapp01
+sudo su -
+systemctl get-default
+systemctl set-default graphical.target
+systemctl status graphical.traget
+systemctl start graphical.target
+systemctl status graphical.target
+systemctl get-default
+
+ssh steve@stapp02
+sudo su -
+systemctl get-default
+systemctl set-default graphical.target
+systemctl status graphical.traget
+systemctl start graphical.target
+systemctl status graphical.target
+systemctl get-default
+
+ssh banner@stapp03
+sudo su -
+systemctl get-default
+systemctl set-default graphical.target
+systemctl status graphical.traget
+systemctl start graphical.target
+systemctl status graphical.target
+systemctl get-default
+
+Task 15:
+A developer javed has been assigned Nautilus project temporarily as a backup resource. As a temporary resource for this project, we need a temporary user for javed. It’s a good idea to create a user with a set expiration date so that the user won't be able to access servers beyond that point.
+Therefore, create a user named javed on the App Server 2. Set expiry date to 2021-04-15 in Stratos Datacenter. Make sure the user is created as per standard and is in lowercase.
+
+ssh steve@stapp02
+sudo su -
+adduser javed
+chage -E 2021-04-15 javed    
+chage -l javed   
