@@ -2,9 +2,11 @@ The Nautilus team doesn't want its data to be accessed by any of the other group
 Setup a collaborative directory /devops/data on Nautilus App 3 server in Stratos Datacenter.
 The directory should be group owned by the group devops and the group should own the files inside the directory. The directory should be read/write/execute to the group owners, and others should not have any access
 
+```
 ssh banner@stapp03
 sudo su -
 mkdir -p /devops/data
 ll -lsd /devops/data/
 chgrp -R devops /devops/data
 chmod -R 2770 /devops/data
+```
