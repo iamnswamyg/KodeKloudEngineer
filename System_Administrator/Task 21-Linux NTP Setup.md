@@ -3,6 +3,7 @@ Install and configure NTP server on App Server 3.
 Add NTP server 3.europe.pool.ntp.org in NTP configuration on App Server 3.
 Please do not try to start/restart/stop ntp service, as we already have a restart for this service scheduled for tonight and we don't want these changes to be applied right now.
 
+```
 ssh banner@stapp03
 sudo su -
 rpm -qa |grep ntp
@@ -17,3 +18,4 @@ systemctl enable ntpd
 systemctl start  ntpd
 systemctl status ntpd
 ntpstat
+```

@@ -3,6 +3,7 @@ On storage server in Stratos Datacenter we have private and public keys stored /
 Encrypt /home/encrypt_me.txt to /home/encrypted_me.asc.
 Decrypt /home/decrypt_me.asc to /home/decrypted_me.txt. (Passphrase for decryption and encryption is kodekloud).
 
+```
 ssh natasha@ststor01
 sudo su -
 cd /home/
@@ -13,8 +14,9 @@ gpg --list-keys
 gpg --list-secret-keys
 gpg --encrypt -r kodekloud@kodekloud.com --armor < encrypt_me.txt  -o encrypted_me.asc
 gpg --decrypt decrypt_me.asc > decrypted_me.txt
- ll
- cat decrypted_me.txt
- cat decrypt_me.asc
- cat encrypt_me.txt
- cat encrypted_me.asc
+ll
+cat decrypted_me.txt
+cat decrypt_me.asc
+cat encrypt_me.txt
+cat encrypted_me.asc
+ ```

@@ -3,9 +3,11 @@ a. On App Server 1 at location /var/www/html/media find out all files (not direc
 b. Copy all those files along with their parent directory structure to location /media on same server.
 c. Please make sure not to copy the entire /var/www/html/media directory content.
 
+```
 ssh tony@stapp01
 sudo su -
 ll /var/www/html/media/
 find /var/www/html/media/ -type f -name '*.js'
 find /var/www/html/media/ -type f -name '*.js' -exec cp --parents {} /media \; 
 ll /media
+```

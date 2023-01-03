@@ -8,6 +8,7 @@ X-Frame-Options header with value SAMEORIGIN
 X-Content-Type-Options header with value nosniff
 Note: You can test using curl on the given app server as LBR URL will not work for this task.
 
+```
 ssh banner@stapp03
 sudo su -
 yum install httpd -y
@@ -26,15 +27,12 @@ cat /etc/httpd/conf/httpd.conf  |grep Listen
 #Listen 12.34.56.78:80
 Listen 6100]
 vi /etc/httpd/conf/httpd.conf
-<IfModule mod_headers.c>
+[<IfModule mod_headers.c>
     Header set X-XSS-Protection: "1; mode=block"
     Header always append X-Frame-Options SAMEORIGIN
     Header set X-Content-Type-Options nosniff
-</IfModule>
+</IfModule>]
 cat /etc/httpd/conf/httpd.conf  |grep X
-[Header set X-XSS-Protection "1; mode=block"
-Header always append X-Frame-Options SAMEORIGIN
-Header set X-Content-Type-Options nosniff]
 ll /var/www/html/
 vi /var/www/html/index.html
 [Welcome to the xFusionCorp Industries!]
@@ -43,3 +41,4 @@ systemctl start httpd
 systemctl status  httpd
 curl http://localhost:6100
 curl -i http://localhost:6100
+```
