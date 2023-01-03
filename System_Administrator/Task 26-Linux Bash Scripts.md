@@ -4,16 +4,16 @@ b. Save the archive in /backup/ on App Server 3. This is a temporary storage, as
 c. Copy the created archive to Nautilus Backup Server server in /backup/ location.
 d. Please make sure script won't ask for password while copying the archive file. Additionally, the respective server user (for example, tony in case of App Server 1) must be able to run it.
 
+```
 ssh banner@stapp03
 vi /scripts/official_backup.sh
-
+[
 #!/bin/bash
 zip -r /backup/xfusioncorp_official.zip /var/www/html/official
 scp /backup/xfusioncorp_official.zip clint@stbkp01:/backup
-
+]
 cat /scripts/official_backup.sh
 chmod +x /scripts/official_backup.sh
-
 ssh-keygen
 ssh-copy-id clint@stbkp01
 ssh clint@stbkp01
@@ -23,3 +23,4 @@ sh official_backup.sh
 ll /backup
 ssh clint@stbkp01
 ll /backup
+```

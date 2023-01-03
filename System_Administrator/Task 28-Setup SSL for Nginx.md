@@ -4,12 +4,13 @@ On App Server 3 there is a self signed SSL certificate and key present at locati
 Create an index.html file with content Welcome! under Nginx document root.
 For final testing try to access the App Server 3 link (either hostname or IP) from jump host using curl command. For example curl -Ik https://<app-server-ip>/.
 
+```
 ssh banner@stapp03
 sudo su -
 yum install   epel-release -y
 yum install   nginx -y
 vi /etc/nginx/nginx.conf
-
+[
 server {
         listen       80;
         listen       [::]:80;
@@ -56,12 +57,13 @@ server {
     }
 
 }
-
+]
 ll /usr/share/nginx/html/
 rm /usr/share/nginx/html/index.html -y
 vi /usr/share/nginx/html/index.html
-Welcome!
+[Welcome!]
 cat /usr/share/nginx/html/index.html
 systemctl start nginx
 systemctl status nginx
 curl -Ik https://stapp03
+```
