@@ -1,12 +1,13 @@
 During the monthly compliance meeting, it was pointed out that several servers in the Stratos DC do not have a valid banner. The security team has provided serveral approved templates which should be applied to the servers to maintain compliance. These will be displayed to the user upon a successful login.
-
 Update the message of the day on all application and db servers for Nautilus. Make use of the approved template located at /home/thor/nautilus_banner on jump host
 
+```
 sudo su -
 cd /home/thor/
 scp -r  nautilus_banner  tony@stapp01:/tmp
 scp -r  nautilus_banner  steve@stapp02:/tmp
 scp -r  nautilus_banner  banner@stapp03:/tmp
+
 ssh peter@stdb01
 sudo su -
 yum install openssh-clients -y
@@ -37,3 +38,4 @@ sudo su -
 mv /tmp/nautilus_banner  /etc/motd
 exit
 exit
+```

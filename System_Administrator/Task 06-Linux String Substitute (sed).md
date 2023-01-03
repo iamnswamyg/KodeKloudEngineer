@@ -5,6 +5,7 @@ b. Replace all occurrence of word "and" to "them" and save results in /home/BSD_
 
 Note: Let's say you are asked to replace word to with from. In that case, make sure not to alter any words containing this string; for example upto, contribu to r etc.
 
+```
 ssh steve@172.16.238.11
 sudo su -
 cd /home/
@@ -20,3 +21,4 @@ fgrep following BSD_DELETE.txt
 fgrep and BSD_REPLACE.txt
 sed -i -r 's/and/them/g' BSD_REPLACE.txt
 fgrep them BSD_REPLACE.txt
+```

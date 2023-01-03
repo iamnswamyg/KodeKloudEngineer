@@ -2,6 +2,8 @@ As per details shared by the development team, the new application release has s
 a. Install nscd package on all the application servers.
 b. Once installed, make sure it is enabled to start during boot.
 
+```
+#Terminal 1
 ssh tony@stapp01
 sudo su -
 yum install nscd -y
@@ -9,6 +11,7 @@ systemctl start nscd
 systemctl enable nscd
 systemctl status nscd
 
+#Terminal 2
 ssh steve@stapp02
 sudo su -
 yum install nscd -y
@@ -16,9 +19,11 @@ systemctl start nscd
 systemctl enable nscd
 systemctl status nscd
 
+#Terminal 3
 ssh banner@stapp03
 sudo su -
 yum install nscd -y
 systemctl start nscd
 systemctl enable nscd
 systemctl status nscd
+```
