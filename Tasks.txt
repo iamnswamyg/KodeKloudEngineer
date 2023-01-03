@@ -1,0 +1,13 @@
+Task01-Puppet String Manipulation
+Task02-Pull Docker Image
+Task03-Ansible Replace Module
+Task04-Countdown job in kubernetes
+Task05-Ansible Archive Module
+Task06-Docker Volumes Mapping
+Task07-Deploy MySQL on Kubernetes
+Task08-Deploy Grafana on Kubernetes Cluster
+Task09-Troubleshoot Issue With Pods
+Task10-Deploy Guest Book App on Kubernetes
+Task11-Git Merge Branches
+Task12-Manage Secrets in Kubernetes
+
