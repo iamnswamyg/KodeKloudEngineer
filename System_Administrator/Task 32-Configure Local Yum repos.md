@@ -3,19 +3,21 @@ a. We have some packages already present at location /packages/downloaded_rpms/ 
 b. Create a yum repo named local_yum and make sure to set Repository ID to local_yum. Configure it to use package's location /packages/downloaded_rpms/.
 c. Install package wget from this newly created repo.
 
+```
 ssh clint@stbkp01
 sudo su -
 yum repolist
 vi /etc/yum.repos.d/local_yum.repo
-cat /etc/yum.repos.d/local_yum.repo
-
+[
 [local_yum]
 name=local_yum
 baseurl=file:///packages/downloaded_rpms/
 enabled = 1
 gpgcheck = 0
-
+]
+cat /etc/yum.repos.d/local_yum.repo
 yum repolist
 yum list
 yum install wget
 yum list wget
+```

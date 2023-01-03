@@ -3,6 +3,8 @@ a. In all app servers install squid package.
 b. Using logrotate configure squid logs rotation to monthly and keep only 3 rotated logs.
 (If by default log rotation is set, then please update configuration as needed)
 
+```
+# Terminal 1
 ssh tony@stapp01
 sudo su -
 rpm -qa |grep squid
@@ -15,6 +17,7 @@ rotate 3]
 systemctl start squid
 systemctl status squid
 
+# Terminal 2
 ssh steve@stapp02
 sudo su -
 rpm -qa |grep squid
@@ -27,6 +30,7 @@ rotate 3]
 systemctl start squid
 systemctl status squid
 
+# Terminal 3
 ssh banner@stapp03
 sudo su -
 rpm -qa |grep squid
@@ -38,3 +42,4 @@ vi /etc/logrotate.d/squid
 rotate 3]
 systemctl start squid
 systemctl status squid
+```

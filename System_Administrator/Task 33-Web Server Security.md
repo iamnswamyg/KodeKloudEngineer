@@ -3,6 +3,7 @@ a. On Nautilus App Server 1 it was identified that the Apache web server is expo
 b. There is a website hosted under /var/www/html/official on App Server 1. It was detected that the directory /official lists all of its contents while browsing the URL. Disable the directory browser listing in Apache config.
 c. Also make sure to restart the Apache service after making the changes.
 
+```
 ssh tony@stapp01
 sudo su -
 systemctl status httpd
@@ -10,15 +11,18 @@ cat /etc/httpd/conf/httpd.conf  |grep ServerTokens
 cat /etc/httpd/conf/httpd.conf  |grep ServerSignature
 cat /etc/httpd/conf/httpd.conf  |grep FollowSymLinks
 vi /etc/httpd/conf/httpd.conf
-
+[
 IncludeOptional conf.d/*.conf
 ServerTokens Prod
 ServerSignature Off
-
-cat /etc/httpd/conf/httpd.conf  |grep FollowSymLinks
+]
+vi /etc/httpd/conf/httpd.conf
+[
 Options FollowSymLinks
-
+]
+cat /etc/httpd/conf/httpd.conf  |grep FollowSymLinks
 systemctl start httpd
 systemctl status httpd
 curl -I http://stapp01:8080
 curl -I http://stapp01:8080/official
+```

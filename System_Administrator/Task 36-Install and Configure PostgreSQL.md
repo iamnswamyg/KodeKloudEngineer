@@ -5,6 +5,7 @@ c. Create a database kodekloud_db1 and grant full permissions to user kodekloud_
 d. Make appropriate settings to allow all local clients (local socket connections) to connect to the kodekloud_db1 database through kodekloud_roy user using md5 method (Please do not try to encrypt password with md5sum).
 e. At the end its good to test the db connection using these new credentials from root user or server's sudo user.
 
+```
 ssh peter@stdb01
 sudo su -
 yum -y install postgresql-server postgresql-contrib
@@ -19,15 +20,20 @@ CREATE DATABASE kodekloud_db1;
 GRANT ALL PRIVILEGES ON DATABASE "kodekloud_db1" to kodekloud_roy;
 \q
 vi /var/lib/pgsql/data/postgresql.conf
-[listen_addresses = 'localhost'  ]
+[
+listen_addresses = 'localhost'  
+]
 cat /var/lib/pgsql/data/postgresql.conf |grep localhost
 vi /var/lib/pgsql/data/pg_hba.conf
-[local   all             all                                      md5
+[
+local   all             all                                      md5
 host    all             all             127.0.0.1/32             md5
-host    all             all             ::1/128                  md5 ]
+host    all             all             ::1/128                  md5 
+]
 systemctl restart postgresql
 systemctl status postgresql
 psql -U kodekloud_roy -d kodekloud_db1 -h 127.0.0.1 -W
 \q
 psql -U kodekloud_roy -d kodekloud_db1 -h localhost -W
 \q
+```
