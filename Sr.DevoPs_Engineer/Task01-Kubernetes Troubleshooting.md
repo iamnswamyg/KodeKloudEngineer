@@ -1,8 +1,8 @@
-Task1:
 One of the Nautilus DevOps team members was working on to update an existing Kubernetes template. Somehow, he made some mistakes in the template and it is failing while applying. We need to fix this as soon as possible, so take a look into it and make sure you are able to apply it without any issues. Also, do not remove any component from the template like pods/deployments/volumes etc.
 /home/thor/mysql_deployment.yml is the template that needs to be fixed.
 Note: The kubectl utility on jump_host has been configured to work with the kubernetes cluster.
 
+```
 cd /home/thor/
 vi mysql_deployment.yml
 mkdir /task
@@ -31,7 +31,8 @@ spec:
 
 ]
 kubectl create -f mysql_pv.yml
-vi mysql_pv.yml
+kubectl get pv
+vi mysql_pvc.yml
 [
 ---
 apiVersion: v1
@@ -49,6 +50,7 @@ spec:
       storage: 250Mi    
 ]
 kubectl create -f mysql_pvc.yml
+kubectl get pvc
 vi mysql_svc.yml
 [
 ---
@@ -69,8 +71,10 @@ spec:
     tier: mysql    
 ]
 kubectl create -f mysql_svc.yml
+kubectl get svc
 vi mysql_deploy.yml
 [
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -126,3 +130,18 @@ spec:
           claimName: mysql-pv-claim
 ]
 kubectl create -f mysql_deploy.yml
+kubectl get deploy //check if all working
+//then delete everything
+kubectl delete deploy mysql-deployment
+kubectl delete svc mysql
+kubectl delete pvc mysql-pvc-claim
+kubectl delete pv mysql-pv
+//recheck everything
+kubectl get deploy
+kubectl get svc
+kubectl get pvc
+kubectl get pv
+//delete content in mysql_deployment.yml
+cat mysql_pv.yml mysql_pvc.yml mysql_svc.yml mysql_deploy.yml /home/thor/mysql_deployment.yml
+kubectl create -f /home/thor/mysql_deployment.yml
+```
