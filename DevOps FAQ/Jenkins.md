@@ -131,7 +131,8 @@ these application servers from where testers can start accessing it.
 - Go to Source Code Management
 - Select Git
 - Enter the github url where Developers have uplaoded the code
-  ``` https://github.com/[user]/[repository].git  
+  ```
+   https://github.com/[user]/[repository].git  
   ```
 - Click on Apply--->Save
 - Go to the dashboard of Jenkins
@@ -182,12 +183,14 @@ This job will deploy the artifact into the QAServer and to access the applicatio
 - Go to Source Code Management
 - Select Git
 - Enter the giturl where testers have uploaded the selenium test scripts 
-  ``` https://github.com/intelliqittrainings/FunctionalTesting.git 
+  ```
+   https://github.com/intelliqittrainings/FunctionalTesting.git 
   ```
 - Go to Build section
 - Click on Add Buil step
 - Click on Execute shell 
-  ``` java -jar path_Testingjar/testing.jar 
+  ``` 
+  java -jar path_Testingjar/testing.jar 
   ```
 - Apply--->Save
 - Go to the dashboard of JEnkins--->Go to Testing job--->Click on Build icon
@@ -216,7 +219,8 @@ Development job should be linked with the Testing job so that after all the stag
 - Go to Post Build actions
 - Click on Add Post Build actions
 - Click on Archive the artifacts  
-   ``` File to archive: **\*.war 
+   ```
+    File to archive: **\*.war 
    ``` 
 - Apply--->Save
 - Go to the dashbord of Jenkins
