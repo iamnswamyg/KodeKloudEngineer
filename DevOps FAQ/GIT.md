@@ -14,7 +14,7 @@ The usual workflow for using a version control system (VCS) like git typically i
 
 It's worth to mention that, not all projects are the same and this workflow can vary depending on the project and the organization but git's branching model makes it very flexible to adapt to different needs.
 
-### 2. What is the usual Checkout using Checkin?
+### 2. What is the Checkout and Checkin process?
 Checkout and checkin are terms commonly used in version control systems (VCS) to refer to the process of taking and returning files for editing.
 
 The usual process of "checking out" a file involves:
