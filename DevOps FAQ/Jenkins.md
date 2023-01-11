@@ -164,10 +164,10 @@ This job will create an artifact from the downloaded java code.
 - Click on Add Post build action
 - Click on Deploy war/ear to container
 - war/ear file: **/*.war
--- context path: testapp
--- Click on Add container---->Select tomcat9
--- Enter tomcat9 credentials
--- Tomcat url: private_ip_of_QAServer:8080
+* context path: testapp
+* Click on Add container---->Select tomcat9
+* Enter tomcat9 credentials
+* Tomcat url: private_ip_of_QAServer:8080
 - Apply---->Save \
 
 This job will deploy the artifact into the QAServer and to access the application from the browser using public_ip_of_qaserver:8080/testapp
