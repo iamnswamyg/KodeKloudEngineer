@@ -57,27 +57,27 @@ c. Connect to Jenkins AWS instances using git bash \
 d. Update the apt repository 
 ```
   sudo apt-get update
-```
+``` \
 e. Install jdk
 ```
-  sudo apt-get install -y openjdk-8-jdk
-```
+  sudo apt-get install -y openjdk-8-jdk 
+``` \
 f. Install git and maven
 ```
   sudo apt-get install -y git maven
-```
+``` \
 g. Download jenkins.war
 ```
   wget https://get.jenkins.io/war-stable/2.249.1/jenkins.war
-```
+```  \
 h. To start jenkins
 ```
   java -jar jenkins.war
-```
+``` \
 i. To access jenkins from a browser
 ```
   https://public_ip_of_jenkinserver:8080
-```
+``` \
 j. Unlock Jenkins by entering the admin password
 k. Click on "Install Suggested plugins"
 l. Create first admin user
