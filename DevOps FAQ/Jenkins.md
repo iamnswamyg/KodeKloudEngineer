@@ -171,7 +171,7 @@ click on Add container---->Select tomcat9
 enter tomcat9 credentials
 ```
 Tomcat url: private_ip_of_QAServer:8080
-- Apply---->Save \
+- Apply---->Save 
 
 This job will deploy the artifact into the QAServer and to access the application from the browser using public_ip_of_qaserver:8080/testapp
 
