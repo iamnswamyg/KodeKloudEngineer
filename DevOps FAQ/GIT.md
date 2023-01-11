@@ -108,6 +108,7 @@ The git pull command fetches changes from the remote repository and merges them 
 git init
 ```
 This command will create a hidden folder called as ".git" where it stores all the configurations related to git.
+
 2. To send a files from working directory to stagging area
 ```
 git add filename
@@ -486,7 +487,7 @@ git checkout <branch-name>
 If none of above options works and if you haven't yet made new commits on top of deleted branch, you can try to recover it from a backup or a copy of your repository.
 It's worth noting that it is a best practice to regularly push branches you are working on to remote repository and to keep track of merge, deletion or important branch updates, to prevent such kind of issues.
 
-### 28.What is git revert? Give an example.
+### 28. What is git revert? Give an example.
 
 In Git, revert is a command that undoes the changes made in a commit. It creates a new commit that undoes the changes of a previous one. This is in contrast to reset, which discards commits, discarding changes permanently.
 
@@ -559,6 +560,7 @@ After you save and close the editor, Git will apply the changes and open another
 It's worth noting that you should use this command with caution, as rewriting history can cause problems if other people have already pulled the commits you're modifying. If the commits have been pushed to a remote repository and other people have pulled them, it's best to avoid rewriting them. Instead, you can create new commits that fix the issues in the older commits, and then use git revert to undo the old commits.
 
 2. git commit --amend is another option for changing the message of an older commit. This command allows you to make changes to the latest commit in your branch, by replacing it with a new commit that includes your changes.
+
 When you run git commit --amend, Git opens an editor where you can edit the commit message and make other changes, such as adding or removing files. Once you save and exit the editor, the new commit will be created and the previous commit will be discarded.
 This command is useful when you want to make a small modification to the latest commit, such as fixing a typo in the commit message, or adding a forgotten file. However, unlike git rebase, git commit --amend only modifies the latest commit and it doesn't affect other commits in the branch.
 Here's an example of how you might use git commit --amend to change the message of the latest commit:
