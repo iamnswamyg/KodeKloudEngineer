@@ -84,157 +84,157 @@ these application servers from where testers can start accessing it.
 - Click on Continue--->Finish--->Save
 
 2. Setup of QA and ProdServers
-a. Connect to QAServer AWS instance using git bash
-b. Update the apt repository
+- Connect to QAServer AWS instance using git bash
+- Update the apt repository
 ```
   sudo apt-get update
 ```
-c. Install tomcat9
+- Install tomcat9
 ```
   sudo apt-get install -y tomcat9
 ```
-d. Install tomcat9-admin
+- Install tomcat9-admin
 ```
   sudo apt-get install -y tomcat9-admin
 ```
-e. Edit the tomcat-users.xml file
+- Edit the tomcat-users.xml file
 ```
   sudo vim /etc/tomcat9/tomcat-users.xml 
 ```
-f. Delete the entore content of the file and add the below data
+- Delete the entore content of the file and add the below data
 ```
   <tomcat-users>
      <user username="nswamyg" password="221222" roles="manager-script"/>
   </tomcat-users>
 ```
-g. Restart tocmat9
+- Restart tocmat9
 ```
   sudo service tomcay9 restart
 ```
-h. To access tomcat from browser
+- To access tomcat from browser
 ```
   https://public_ip_of_qa:8080
 ```
 
 3. Repeat the above g steps on ProdServer AWS instance
-a. To access tomcat from browser
+- To access tomcat from browser
 ```
   https://public_ip_of_prod:8080
 ```
 
 ### 5. Graphical Setup of CI/CD in Jenkis
 1. Continuous Download:
-a. Open the dashboard of Jenkins
-b. Click on New item
-c. enter item name as "Development"
-d. Select Free Style Project--->OK
-e. Go to Source Code Management
-f. Select Git
-g. Enter the github url where Developers have uplaoded the code
+- Open the dashboard of Jenkins
+- Click on New item
+- enter item name as "Development"
+- Select Free Style Project--->OK
+- Go to Source Code Management
+- Select Git
+- Enter the github url where Developers have uplaoded the code
   https://github.com/[user]/[repository].git
-h. Click on Apply--->Save
-i. Go to the dashboard of Jenkins
-j. Go to the Development job--->click on Build icon
+- Click on Apply--->Save
+- Go to the dashboard of Jenkins
+- Go to the Development job--->click on Build icon
 
 This job will download all the code created by the developers
 
 2. Continuious Build:
-a. Open the dashboard of Jenkins
-b. Go the Development job---->Click on Configure
-c. Go to Build section
-d. Click on Add Build step
-e. Click on Invoke top level maven targets
-f. Enter the Goal:    package
-g. Click on Apply---->Save
-h. Go to the dashboard of Jenkins
-j. Go to the Devlopment job--->click on Build icon
+- Open the dashboard of Jenkins
+- Go the Development job---->Click on Configure
+- Go to Build section
+- Click on Add Build step
+- Click on Invoke top level maven targets
+- Enter the Goal:    package
+- Click on Apply---->Save
+- Go to the dashboard of Jenkins
+- Go to the Devlopment job--->click on Build icon
 
 This job will create an artifact from the downloaded java code.
 
 3. Continuous Deployment:
-a. Open the dashboard of Jenkins
-b. Click on Manage Jenkins
-c. Click on Manage Plugins
-d. Go to Available section
-e. Search for "Deploy to Container" plugin
-f. Click on Install without restart
-g. Go to the dashboard of Jenkins
-h. Go to the Development job--->Click on configure
-i. Go to Post Build actions
-j. Click on Add Post build action
-k. Click on Deploy war/ear to container
-l. war/ear file: **/*.war\
+- Open the dashboard of Jenkins
+- Click on Manage Jenkins
+- Click on Manage Plugins
+- Go to Available section
+- Search for "Deploy to Container" plugin
+- Click on Install without restart
+- Go to the dashboard of Jenkins
+- Go to the Development job--->Click on configure
+- Go to Post Build actions
+- Click on Add Post build action
+- Click on Deploy war/ear to container
+- war/ear file: **/*.war\
    context path: testapp\
    Click on Add container---->Select tomcat9\
    Enter tomcat9 credentials\
    Tomcat url: private_ip_of_QAServer:8080\
-m. Apply---->Save\
+- Apply---->Save\
 
 This job will deploy the artifact into the QAServer and to access the application from the browser using public_ip_of_qaserver:8080/testapp
 
 4. Continuous Testing
-a. Open the dashboard of Jenkins
-b. Click on New item--->Enter item name as Testing
-c. Select Free Style Project---->OK
-d. Go to Source Code Management
-e. Select Git
-f. Enter the giturl where testers have uploaded the selenium test scripts \
+- Open the dashboard of Jenkins
+- Click on New item--->Enter item name as Testing
+- Select Free Style Project---->OK
+- Go to Source Code Management
+- Select Git
+- Enter the giturl where testers have uploaded the selenium test scripts \
   https://github.com/intelliqittrainings/FunctionalTesting.git \
-g. Go to Build section
-h. Click on Add Buil step
-i. Click on Execute shell\
+- Go to Build section
+- Click on Add Buil step
+- Click on Execute shell\
   java -jar path_Testingjar/testing.jar \
-j. Apply--->Save
-k. Go to the dashboard of JEnkins--->Go to Testing job--->Click on Build icon
+- Apply--->Save
+- Go to the dashboard of JEnkins--->Go to Testing job--->Click on Build icon
 
 This job will download all the Selenium test scripts and execute them on the application deployed into the QAServer.
 
 5. Linking Development job to Testing job
 Development job should be linked with the Testing job so that after all the stages in the Development job it will trigger the Testing job.
 
-a. Open the dashoboard of Jenkins
-b. Go to Development job--->Click on configure
-c. Go to Post Build actions
-d. Click on Add Post Build actions
-e. Click on Buil other projects
-f. Enter project name as "Testing"
-8. Apply---->Save
+- Open the dashoboard of Jenkins
+- Go to Development job--->Click on configure
+- Go to Post Build actions
+- Click on Add Post Build actions
+- Click on Buil other projects
+- Enter project name as "Testing"
+- Apply---->Save
 
 6. Copying artifacts from Development job and Testing job
-a. Open the dashboard of Jenkins
-b. Click on Manage Jenkins--->Manage Plugins
-c. Go to Available section
-d. Search for "Copy Artifact" plugin
-e. Click on Install without restart
-f. Go to the dashboard of Jenkins
-g. Go to the Development job--->Click on configure
-h. Go to Post Build actions
-i. Click on Add Post Build actions
-j. Click on Archive the artifacts \ 
+- Open the dashboard of Jenkins
+- Click on Manage Jenkins--->Manage Plugins
+- Go to Available section
+- Search for "Copy Artifact" plugin
+- Click on Install without restart
+- Go to the dashboard of Jenkins
+- Go to the Development job--->Click on configure
+- Go to Post Build actions
+- Click on Add Post Build actions
+- Click on Archive the artifacts \ 
    File to archive: **\*.war  \
-k. Apply--->Save
-l. Go to the dashbord of Jenkins
-m. Go to the Testing job---->Click on Configure
-n. Go to Build section
-o. Click on Add Build step
-p. Click on Copy artifacts from other projects
-q. enter project name as Development
-r. Save
+- Apply--->Save
+- Go to the dashbord of Jenkins
+- Go to the Testing job---->Click on Configure
+- Go to Build section
+- Click on Add Build step
+- Click on Copy artifacts from other projects
+- enter project name as Development
+- Save
 
 7.Continuous Delivery
-a. Open the dashboard of JEnkins
-b. Go to the Testing job
-c. Click on Configure
-d. Go to Post Build actions
-e. Click on Add post build action
-f. Click on Deploy war/ear to container
-g. war/ear files: **/*.war \
+- Open the dashboard of JEnkins
+- Go to the Testing job
+- Click on Configure
+- Go to Post Build actions
+- Click on Add post build action
+- Click on Deploy war/ear to container
+- war/ear files: **/*.war \
   Context path: prodapp \
   Click on Add container \
   Select tomcat9 \
   Enter username and password of tomcat9 \
   Tomcat url: private_ip_of_prodserver:8080 \
-h. Apply--->Save
+- Apply--->Save
 
 =========================================================================
 Day 5
