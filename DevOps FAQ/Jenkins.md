@@ -50,11 +50,11 @@ these application servers from where testers can start accessing it.
 6. Continous Monitoring:?
 
 ### 5. Setup Sample CI/CD using Jenkins, QA and Prod Servers.
-1. Setup of Jenkins
-a. Create 3 AWS "ubuntu 20" instances
-b. Name the first one as Jenkins second as QAServer and third as ProdServer
-c. Connect to Jenkins AWS instances using git bash
-d. Update the apt repository
+1. Setup of Jenkins \
+a. Create 3 AWS "ubuntu 20" instances \
+b. Name the first one as Jenkins second as QAServer and third as ProdServer \
+c. Connect to Jenkins AWS instances using git bash \
+d. Update the apt repository 
 ```
   sudo apt-get update
 ```
