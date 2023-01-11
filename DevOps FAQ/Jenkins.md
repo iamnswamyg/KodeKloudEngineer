@@ -107,15 +107,15 @@ these application servers from where testers can start accessing it.
      <user username="nswamyg" password="221222" roles="manager-script"/>
   </tomcat-users>
 ```
-- Restart tocmat9
+- Restart tomcat9
 ```
-  sudo service tomcay9 restart
+  sudo service tomcat restart
 ```
 - To access tomcat from browser
 ```
   https://public_ip_of_qa:8080
 ```
-
+\
 3. Repeat the above g steps on ProdServer AWS instance
 - To access tomcat from browser
 ```
@@ -168,7 +168,7 @@ This job will create an artifact from the downloaded java code.
    Click on Add container---->Select tomcat9\
    Enter tomcat9 credentials\
    Tomcat url: private_ip_of_QAServer:8080\
-- Apply---->Save\
+- Apply---->Save \
 
 This job will deploy the artifact into the QAServer and to access the application from the browser using public_ip_of_qaserver:8080/testapp
 
@@ -182,8 +182,8 @@ This job will deploy the artifact into the QAServer and to access the applicatio
   https://github.com/intelliqittrainings/FunctionalTesting.git \
 - Go to Build section
 - Click on Add Buil step
-- Click on Execute shell\
-  java -jar path_Testingjar/testing.jar \
+- Click on Execute shell \
+  java -jar path_Testingjar/testing.jar 
 - Apply--->Save
 - Go to the dashboard of JEnkins--->Go to Testing job--->Click on Build icon
 
@@ -210,8 +210,8 @@ Development job should be linked with the Testing job so that after all the stag
 - Go to the Development job--->Click on configure
 - Go to Post Build actions
 - Click on Add Post Build actions
-- Click on Archive the artifacts \ 
-   File to archive: **\*.war  \
+- Click on Archive the artifacts  
+   -- File to archive: **\*.war  
 - Apply--->Save
 - Go to the dashbord of Jenkins
 - Go to the Testing job---->Click on Configure
