@@ -131,7 +131,8 @@ these application servers from where testers can start accessing it.
 - Go to Source Code Management
 - Select Git
 - Enter the github url where Developers have uplaoded the code
-  -- https://github.com/[user]/[repository].git
+  ``` https://github.com/[user]/[repository].git  
+  ```
 - Click on Apply--->Save
 - Go to the dashboard of Jenkins
 - Go to the Development job--->click on Build icon
@@ -163,11 +164,13 @@ This job will create an artifact from the downloaded java code.
 - Go to Post Build actions
 - Click on Add Post build action
 - Click on Deploy war/ear to container
-- war/ear file: **/*.war
- * context path: testapp
- * Click on Add container---->Select tomcat9
- * Enter tomcat9 credentials
- * Tomcat url: private_ip_of_QAServer:8080
+```
+war/ear file: **/*.war
+context path: testapp
+click on Add container---->Select tomcat9
+enter tomcat9 credentials
+```
+Tomcat url: private_ip_of_QAServer:8080
 - Apply---->Save \
 
 This job will deploy the artifact into the QAServer and to access the application from the browser using public_ip_of_qaserver:8080/testapp
@@ -179,11 +182,13 @@ This job will deploy the artifact into the QAServer and to access the applicatio
 - Go to Source Code Management
 - Select Git
 - Enter the giturl where testers have uploaded the selenium test scripts 
-  -- https://github.com/intelliqittrainings/FunctionalTesting.git \
+  ``` https://github.com/intelliqittrainings/FunctionalTesting.git 
+  ```
 - Go to Build section
 - Click on Add Buil step
 - Click on Execute shell 
-  -- java -jar path_Testingjar/testing.jar 
+  ``` java -jar path_Testingjar/testing.jar 
+  ```
 - Apply--->Save
 - Go to the dashboard of JEnkins--->Go to Testing job--->Click on Build icon
 
@@ -211,7 +216,8 @@ Development job should be linked with the Testing job so that after all the stag
 - Go to Post Build actions
 - Click on Add Post Build actions
 - Click on Archive the artifacts  
-   -- File to archive: **\*.war  
+   ``` File to archive: **\*.war 
+   ``` 
 - Apply--->Save
 - Go to the dashbord of Jenkins
 - Go to the Testing job---->Click on Configure
@@ -228,13 +234,18 @@ Development job should be linked with the Testing job so that after all the stag
 - Go to Post Build actions
 - Click on Add post build action
 - Click on Deploy war/ear to container
-- war/ear files: **/*.war 
-  -- Context path: prodapp 
-  -- Click on Add container 
-  -- Select tomcat9 
-  -- Enter username and password of tomcat9 
-  -- Tomcat url: private_ip_of_prodserver:8080 
+  ```
+  war/ear files: **/*.war 
+  context path: prodapp 
+  click on Add container 
+  select tomcat9 
+  enter username and password of tomcat9 
+  tomcat url: private_ip_of_prodserver:8080 
+  ```
 - Apply--->Save
+
+ 
+
 
 =========================================================================
 Day 5
