@@ -115,8 +115,6 @@ these application servers from where testers can start accessing it.
 ```
   https://public_ip_of_qa:8080
 ```
-\
-3. **Repeat the above g steps on ProdServer AWS instance**
 - To access tomcat from browser
 ```
   https://public_ip_of_prod:8080
