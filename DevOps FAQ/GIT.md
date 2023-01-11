@@ -40,34 +40,42 @@ There are several different types of version control systems (VCS) available, ea
 
 ### 5. How to install Git on Windows?
 
-1 Open https://git-scm.com/downloads
-2 Download git for windows
-3 Install it
-4 Once git is installed we get an application called gitbash
+1. Open https://git-scm.com/downloads
+2. Download git for windows
+3. Install it
+4. Once git is installed we get an application called gitbash
   where we can fire the git commands
 
 ### 6. How to install Git on Ubuntu?
 
-1 Connect to a ubuntu linux
-2 Update the apt repository
+1. Connect to a ubuntu linux
+2. Update the apt repository
   sudo apt-get update
-3 Install git
+3. Install git
   sudo apt-get install -y git
 
 ### 7. How to install Git on RHEL,Centos,Fedora?
 
-1 Update the yum repository
+
+1. Update the yum repository
+```
   yum -y update
-2 Install git
+```
+2. Install git
+```
   yum install -y git
+```
 
 ### 8. How to setup and list username and email for all users for Git?
-
-git config --global user.name "sai krishna"
-git config --global user.email "intelliqittrainings@gmail.com
+```
+git config --global user.name "narayanswamy"
+git config --global user.email "narayansg4u@gmail.com
+```
 
 To see the list of configurations done
+```
 git config --global  --list
+```
 
 ### 9. What are the sections Git uses when working on the local machine?
 When working with Git on a local machine, there are three main sections that are used to store and manage the files:
