@@ -50,38 +50,38 @@ these application servers from where testers can start accessing it.
 6. Continous Monitoring:?
 
 ### 5. Setup Sample CI/CD using Jenkins, QA and Prod Servers.
-1. Setup of Jenkins \
-a. Create 3 AWS "ubuntu 20" instances \
-b. Name the first one as Jenkins second as QAServer and third as ProdServer \
-c. Connect to Jenkins AWS instances using git bash \
-d. Update the apt repository 
+1. Setup of Jenkins 
+- Create 3 AWS "ubuntu 20" instances 
+- Name the first one as Jenkins second as QAServer and third as ProdServer 
+- Connect to Jenkins AWS instances using git bash 
+- Update the apt repository 
 ```
   sudo apt-get update
 ```
-e. Install jdk
+- Install jdk
 ```
   sudo apt-get install -y openjdk-8-jdk
 ```
-f. Install git and maven
+- Install git and maven
 ```
   sudo apt-get install -y git maven
 ```
-g. Download jenkins.war
+- Download jenkins.war
 ```
   wget https://get.jenkins.io/war-stable/2.249.1/jenkins.war
 ```
-h. To start jenkins
+- To start jenkins
 ```
   java -jar jenkins.war
 ```
-i. To access jenkins from a browser
+- To access jenkins from a browser
 ```
   https://public_ip_of_jenkinserver:8080
 ```
-j. Unlock Jenkins by entering the admin password
-k. Click on "Install Suggested plugins"
-l. Create first admin user
-m. Click on Continue--->Finish--->Save
+- Unlock Jenkins by entering the admin password
+- Click on "Install Suggested plugins"
+- Create first admin user
+- Click on Continue--->Finish--->Save
 
 2. Setup of QA and ProdServers
 a. Connect to QAServer AWS instance using git bash
