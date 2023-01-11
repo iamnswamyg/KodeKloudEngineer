@@ -123,7 +123,7 @@ these application servers from where testers can start accessing it.
 ```
 
 ### 5. Graphical Setup of CI/CD in Jenkis
-1. Continuous Download:
+1. ** Continuous Download: **
 - Open the dashboard of Jenkins
 - Click on New item
 - enter item name as "Development"
@@ -139,7 +139,7 @@ these application servers from where testers can start accessing it.
 
 This job will download all the code created by the developers
 
-2. Continuious Build:
+2. ** Continuious Build: **
 - Open the dashboard of Jenkins
 - Go the Development job---->Click on Configure
 - Go to Build section
@@ -152,7 +152,7 @@ This job will download all the code created by the developers
 
 This job will create an artifact from the downloaded java code.
 
-3. Continuous Deployment:
+3. ** Continuous Deployment: **
 - Open the dashboard of Jenkins
 - Click on Manage Jenkins
 - Click on Manage Plugins
@@ -175,7 +175,7 @@ Tomcat url: private_ip_of_QAServer:8080
 
 This job will deploy the artifact into the QAServer and to access the application from the browser using public_ip_of_qaserver:8080/testapp
 
-4. Continuous Testing
+4. ** Continuous Testing **
 - Open the dashboard of Jenkins
 - Click on New item--->Enter item name as Testing
 - Select Free Style Project---->OK
@@ -194,7 +194,7 @@ This job will deploy the artifact into the QAServer and to access the applicatio
 
 This job will download all the Selenium test scripts and execute them on the application deployed into the QAServer.
 
-5. Linking Development job to Testing job
+5. ** Linking Development job to Testing job **
 Development job should be linked with the Testing job so that after all the stages in the Development job it will trigger the Testing job.
 
 - Open the dashoboard of Jenkins
@@ -205,7 +205,7 @@ Development job should be linked with the Testing job so that after all the stag
 - Enter project name as "Testing"
 - Apply---->Save
 
-6. Copying artifacts from Development job and Testing job
+6. ** Copying artifacts from Development job and Testing job **
 - Open the dashboard of Jenkins
 - Click on Manage Jenkins--->Manage Plugins
 - Go to Available section
@@ -227,7 +227,7 @@ Development job should be linked with the Testing job so that after all the stag
 - enter project name as Development
 - Save
 
-7.Continuous Delivery
+7. ** Continuous Delivery **
 - Open the dashboard of JEnkins
 - Go to the Testing job
 - Click on Configure
