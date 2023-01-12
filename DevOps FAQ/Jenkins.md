@@ -918,7 +918,7 @@ Developers upload multiple functionalities code on different branches. On each o
 5. Go to Scan Multi branch pipeline triggers---->Select 1 minute
 6. Apply--->Save
 
-### 16. Give an example for MultiBranch declarative Pipeline as Code for Java?
+### 16. Give an example for MultiBranch declarative Pipeline?
 ```
 pipeline {
     agent {
