@@ -550,9 +550,8 @@ pipeline
    }
 }
 ```
-============================================================================
-Scripted Pipeline Code
-==========================
+### 12. Can you give me a scripted pipeline example for Java based project?
+```
 node('master') 
 {
     stage('ContinuousDownload_Master') 
@@ -577,128 +576,52 @@ node('master')
        
         sh label: '', script: 'scp /home/ubuntu/.jenkins/workspace/ScriptedPipeline/webapp/target/webapp.war ubuntu@172.31.48.61:/var/lib/tomcat8/webapps/prodapp.war'
     }
-    
-    
-    
-    
-    
-}
-=====================================================================
-Day 8
-=====================================================================
-In most cases the jenkinsfile is uploaded into the github
-along with the application code by the developers.The jnekinsfile
-for the remote gitserver will  trigger all the stages of ci-cd
-
-Developers Activity
-===========================
-1 Clone the maven project 
-  git clone https://github.com/intelliqittrainings/maven.git
-
-2 Move into this cloned repository and delete the .git folder
-  cd maven
-  rm -rf .git
-
-3 Create a new git repo and send the code into the stagging area and local
-  repository
-  git init
-  git add .
-  git commit -m "a"
-
-4 Create a file called Jenkinsfile and copy paste the Scripted pipeline
-  code.
-
-5 Send it to stagging and local reposiotry
-  git add .
-  git commit -m "b"
-
-4 Open github.com---->Signin into you account
-
-5 Click on + on top right corner---->Click on New repository
-
-6 Enter some reposiotry name--->Select Public or Private
-  Click on Create repository
-
-7 Go to Push an existing reposiotry from command line
-  Copy and paste the first command.This will create a link between the
-  local reposiotry and the remote github repository
-
-8 Copy the second command
-  git push -u origin master
-
-Devops Enginers Activity
-==============================
-1 Open the dashboard of Jenkins
-
-2 Click on New item--->Enter some itemname
-
-3 Select Pipeline project--->OK
-
-4 Go to Pileline section--->Select Pipeline script from SCM
-
-5 Select SCM as Git
-
-6 In Repository url: Enter the github url where we uploaded the code
-
-7 Click on Apply--->Save
-
-============================================================================
-Declarative Pipeline
-==============================================================================
-Declarative Pipeline
-------------------------
-pipeline
+ }
+  ```  
+### 12. Can you give me a scripted pipeline example for Dotnet based project?    
+   ``` 
+node('windows') 
 {
-    agent any
-    stages
+    stage('ContinuousDownload_Master') 
     {
-        stage('ContinuousDownload')
-        {
-            steps
-            {
-                git 'https://github.com/intelliqittrainings/maven.git'
-            }
-        }
-        stage('ContinuousBuild')
-        {
-            steps
-            {
-               sh label: '', script: 'mvn package'
-            }
-        }
-        stage('ContinuousDeployment')
-        {
-            steps
-            {
-               sh label: '', script: '''
-scp /home/ubuntu/.jenkins/workspace/DeclarativePipeline/webapp/target/webapp.war ubuntu@172.31.45.245:/var/lib/tomcat8/webapps/newtestapp.war'''
-            }
-        }
-        stage('ContinuousTesting')
-        {
-            steps
-            {
-                git 'https://github.com/intelliqittrainings/FunctionalTesting.git'
-                sh label: '', script: 'java -jar /home/ubuntu/.jenkins/workspace/DeclarativePipeline/testing.jar'
-            }
-        }
-        stage('ContinuousDelivery')
-        {
-            steps
-            {
-                input submitter: 'srinivas', message: 'Waiting for Approval!'
-                
-                 sh label: '', script: '''
-scp /home/ubuntu/.jenkins/workspace/DeclarativePipeline/webapp/target/webapp.war ubuntu@172.31.42.87:/var/lib/tomcat8/webapps/newprodapp.war'''
-            }
-        }
+         git branch: 'master', url: 'https://github.com/username/aspnet-project.git'
     }
+     stage('ContinuousBuild_Master') 
+    {
+        bat '"C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\msbuild.exe" /p:Configuration=Release /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:publishUrl="C:\\inetpub\\wwwroot\\aspnet-project"'
+    }
+    stage('ContinuousDeployment_Master')
+    {
+        sh label: '', script: 'scp /home/ubuntu/.jenkins/workspace/ScriptedPipeline/webapp/target/webapp.war ubuntu@172.31.55.129:/var/lib/tomcat8/webapps/qaapp.war'
+    }
+    stage('ContinuousTesting_Master')
+    {
+        bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Common7\\IDE\\Extensions\\TestPlatform\\vstest.console.exe" /logger:trx /TestAdapterPath:"C:\\inetpub\\wwwroot\\aspnet-project\\test\\bin\\Debug" "C:\\inetpub\\wwwroot\\aspnet-project\\test\\bin\\Debug\\aspnet-project.test.dll"'
+                publishTestResults (testResults: '**/*.trx')
+    }
+     stage('ContinuousDelivery_Master')
+    {
+       
+        bat 'net stop w3svc'
+                bat 'xcopy "C:\\inetpub\\wwwroot\\aspnet-project\\bin\\Release\\Publish" "C:\\inetpub\\wwwroot\\aspnet-project" /s /e'
+                bat 'net start w3svc'
+    }
+
 }
+  ``` 
+ 
+### 13. How to create pipeline as code project in Jenkins?
+1. Open the dashboard of Jenkins
+2. Click on New item--->Enter some itemname
+3. Select Pipeline project--->OK
+4. Go to Pileline section--->Select Pipeline script from SCM
+5. Select SCM as Git
+6. In Repository url: Enter the github url where we uploaded the code
+7. Click on Apply--->Save
 
-========================================================================
+### 14. How to create declarative pipeline with post conditions?
 Declarative Pipeline with Post Conditions
------------------------------------------------
-
+ ``` 
 pipeline
 {
     agent any
@@ -751,35 +674,23 @@ scp /home/ubuntu/.jenkins/workspace/DeclarativePipeline/webapp/target/webapp.war
     
     
     }
-    
-    
-    
-    
-    }
-================================================================================
+   }
+   ``` 
+  
+### 15. What are CatLight notifications and How do we setup to get notifications? 
+This is a client side s/w which is used to send notifications of jenkins jobs in the form of simple pop msgs. CatLight has to be installed on every individual team members machines/
+1. Open https://catlight.io/downloads
+2. Download and install catlight for windows
+3. Open cat light and it will display the list of CI tools that it can connect to
+4. Select JEnkins
+5. Enter the public_ip_of_jenkins_Server:8080
+6.  Enter username and password of jenkins
+7. Catlight will display the list of jobs available in jenkins
+8. Select the jobs for which we need notifications
+9. Run that job in Jenkins and we will get a desktop notification
 
-CatLight Notifications
-==============================
-This is a client side s/w which is used to send notifications
-of jenkins jobs in the form of simple pop msgs
-Cat light has to be installed on every individual team 
-members machines
-
-1 Open https://catlight.io/downloads
-2 Download and install catlight for windows
-3 Open cat light and it will display the list of CI tools that it can connect to
-3 Select JEnkins
-4 Enter the public_ip_of_jenkins_Server:8080
-  Enter username and password of jenkins
-5 Catlight will display the list of jobs available in jenkins
-6 Select the jobs for which we need notifications
-7 Run that job in Jenkins and we will get a desktop notification
-
-============================================================================
-Day 9
-============================================================================
-Exception Handling in Declarative Pipeline
-=================================================================
+### 14. How to create declarative pipeline with exception handling?
+``` 
 pipeline
 {
     agent any
@@ -886,10 +797,10 @@ pipeline
   
        
 }
+``` 
 
-=================================================================
-Exception handling in Scripted Pipeline
-=================================================================
+### 15. How to create scripted pipeline with exception handling?
+```
 node('master') 
 {
     stage('ContinuousDownload') 
@@ -974,102 +885,153 @@ node('master')
         }
         
     }
-    
-    
-    
-    
-    
 }
-=======================================================================
-Webhooks 
-===========
-This is  used to send notifications from github to jenkins
-Whenever any code changes are done and that is checkdin into
-github, webhook will send an immediate notifiction ot JEnkins
-and Jenkins will triggern the job
+```
 
-1 Open github.com---->Click on the reposiotry that we are working on
-2 On the right corner clikc on Setting
-3 Click on Webhooks in the left pannel
-4 Click on Add Webhook
-5 In Payload URL: http://public_ip_jenkinsserver:8080/github-webhook/
-6 In Content type select :application/json
-7 Click on Add Webhook
-8 Open the dashboaard of Jenkins
-9 Go to the job that we want to configure
-10 Go to Build triggers
-11 Check GitHub hook trigger for GITScm polling
-12 Click on Apply--->Save
-   Now if we make any changes to the code in github then github
-  will send an notification to jenkins and jenkins will run that job
+### 16. What are Wehooks? How do we setup them in Jenkins? 
+Webhooks used to send notifications from git server to jenkins whenever any code changes are done and that is checkdin into git. Webhook will send an immediate notifiction to Jenkins and Jenkins will trigger the job that has subscribed to webhook.
+
+1. Open github.com---->Click on the reposiotry that we are working on
+2. On the right corner clikc on Setting
+3. Click on Webhooks in the left pannel
+4. Click on Add Webhook
+5. In Payload URL: http://public_ip_jenkinsserver:8080/github-webhook/
+6. In Content type select :application/json
+7. Click on Add Webhook
+8. Open the dashboaard of Jenkins
+9. Go to the job that we want to configure
+10. Go to Build triggers
+11. Check GitHub hook trigger for GITScm polling
+12. Click on Apply--->Save
+
+Now if we make any changes to the code in github then github will send an notification to jenkins and jenkins will run that job.
 
 
-==============================================================================
-Day 10
-==============================================================================
+### 16. What is MultiBranch Pipeline?
+Developers upload multiple functionalities code on different branches. On each of these branches there will be a copy of the Jenkinsfile which has CI with or without CD instructions of what should be done on that branch.
 
-MultiBranch Pipeline
-===========================
-Developers upload multiple functionalities code on different branches
-On each of these branches there will be a copy of the Jenkinsfile
-which has CI instructions of what should be done on that branch
+- **Setting up mulitbranch pipeline project in Jenkins**
+1. Open the dashboard of Jenkins
+2. Click on New item---->Enter item name as MultBranchPipeline
+3. Select MultiBranchPipeline--->OK
+4. Go to Branch Sounrces---->Select Git-->enter github url where developers uploaded the code
+5. Go to Scan Multi branch pipeline triggers---->Select 1 minute
+6. Apply--->Save
 
-Developers Activity
-=========================
-1 Clone the maven repository
-  git clone https://github.com/intelliqittrainings/maven.git
+### 16. Give an example for MultiBranch declarative Pipeline as Code for Java?
+```
+pipeline {
+    agent {
+        docker {
+            image 'node:lts-alpine'
+            args '-p 3000:3000 -p 5000:5000'
+        }
+    }
+    environment {
+        CI = 'true'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh './jenkins/scripts/test.sh'
+            }
+        }
+        stage('Deliver for development') {
+            when {
+                branch 'development' 
+            }
+            steps {
+                sh './jenkins/scripts/deliver-for-development.sh'
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                sh './jenkins/scripts/kill.sh'
+            }
+        }
+        stage('Deploy for production') {
+            when {
+                branch 'production'  
+            }
+            steps {
+                sh './jenkins/scripts/deploy-for-production.sh'
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                sh './jenkins/scripts/kill.sh'
+            }
+        }
+    }
+}
+```
 
-2 Move into this cloned repository and delete .git folder
-  cd maven
-  rm -rf .git
-
-3 Initilise a new git repository
-  git init
-
-4 Send the files into stagging area and local repository
-  git add .
-  git commit -m "a"
-
-5 Create a jenkins file and put the stages of CI that should happen 
-  on master  branch
-  vim Jenkinsfile
-
-6 Send it to stagging and local repository
-  git add .
-  git commit -m "b"
-
-7 Create a new branch called loans and create a create a new Jenkinsfile
-  git checkout -b loans
-  vim Jenkinsfile
-  Use the CI instructions that should be done on Loans branch
-
-8 Send this to stagging and local repoistory
-  git add .
-  git commit -m "c"
-
-9 Open github.com---->Create a new repository
-
-10 Push all the branches from local machine to remote github
-   git push origin --all
-
-Jenkins Admin Activity
-==============================
-1 Open the dashboard of Jenkins
-
-2 Click on New item---->Enter item name as MultBranchPipeline
-
-3 Select MultiBranchPipeline--->OK
-
-4 Go to Branch Sounrces---->Select Git-->enter github url where developers
-  uploaded the code
-
-5 Go to Scan Multi branch pipeline triggers---->Select 1 minute
-
-6 Apply--->Save
-
-
- 
-
+### 17. Give an example for using docker containers as agents?
+ 1. Create a specific node as agent.
+```
+pipeline {
+  agent {
+    docker { image 'node:16-alpine' }
+  }
+  stages {
+    stage('Test') {
+      steps {
+        sh 'node --version'
+      }
+    }
+  }
+}
+```
+2. Create an agent specific to stage
+```
+pipeline {
+  agent none
+  stages {
+    stage('Back-end') {
+      agent {
+        docker { image 'maven:3.8.1-adoptopenjdk-11' }
+      }
+      steps {
+        sh 'mvn --version'
+      }
+    }
+    stage('Front-end') {
+      agent {
+        docker { image 'node:16-alpine' }
+      }
+      steps {
+        sh 'node --version'
+      }
+    }
+  }
+}
+```
+3. With dockerfile in the repository
+ - **jenkinsfile**
+```
+pipeline {
+  agent { dockerfile true }
+  stages {
+    stage('Test') {
+      steps {
+        sh '''
+          node --version
+          git --version
+          curl --version
+        '''
+      }
+    }
+  }
+}
+```
+ - **dockerfile**
+ ```
+FROM node:16-alpine
+RUN apk add -U git curl
+```
+### 17. Why would you want to use an image that turns into a container as your build agent? 
+1. As a pipeline author it gives us the capability to define the tools and specific versions of those tools that we want to use in our pipeline. So that those items are not being mandated by others. 
+2. If in our environment someone else has to install the tools for our agent, we can completely bypass all of that because we're able to dynamically bring in the tools that we want at runtime.
+3. It gives us the chance to experiment with different tools without having to make a long-term commitment to those tools because if in the case of VM agent we have a dependency on someone else installing tools for us which might take a long time. But by running it as container we have the freedom to test the tools we want later which we can use static versions of those tools in production environmet agent if needed or we just stay with your container-based build agents.
 
 
 
