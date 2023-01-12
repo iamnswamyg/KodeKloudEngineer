@@ -347,78 +347,53 @@ curl http://localhost:8080
 If we login into jenkins as user1 we can access only the development related jobs and user2 can access only the testing related jobs.
 
 
-===========================================================================
-Day 6
-===========================================================================
-MAster Slave Architecture of Jenkins
-============================================
-This is used distribute the work load to additional linux
-servers called as slaves.This is used when we want to run multiple 
-jobs on jenkins parallelly.
+### 9. What is Master Slave Architecture of Jenkins and How do we setup it?
+This is used distribute the work load to additional linux servers called as slaves. This is used when we want to run multiple jobs on jenkins parallelly.
 
-Setup
-============
-1 Create a new AWS ubuntu20 instance
+1. Setup
+ - Create a new AWS ubuntu20 instance
 
-2 Install the same version of java as present in the master
+ - Install the same version of java as present in the master
+  ```
   sudo apt-get update
   sudo apt-get install -y openjdk-8-jdk
-
-3 Setup passwordless SSH betwen Master and slave
-  a) Connect to slave and set password to default user
+  ```
+ - Setup passwordless SSH betwen Master and slave
+ ```
+  // Connect to slave and set password to default user
      sudo passwd ubuntu
-  b) Edit the ssh config file
+  // Edit the ssh config file
      sudo vim /etc/ssh/sshd_config
      Search for "PasswordAuthentication" and change it from no to yes
-  c) Restart ssh
+  // Restart ssh
      sudo service ssh restart
-  d) Connect to Master using git bash
-  e) Generate the ssh keys
+  // Connect to Master using git bash & Generate the ssh keys
      ssh-keygen
-  f) Copy the ssh keys
+  // Copy the ssh keys & copy the content of the public keys to a file called "authorised_keys" on the slave machine
      ssh-copy-id ubuntu@private_ip_of_slave
-     This will copy the content of the public keys to a file called
-     "authorised_keys" on the slave machine
-
-===========================================================================
-Day 7
-===========================================================================
-  Connect to slave using git bash
-4 Downlaod the slave.jar file
+ 
+ ```
+2. Connect to slave using git bash
+ - Downlaod the slave.jar file
+ ```
   wget http://private_ip_of_jenkinsserver:8080/jnlpJars/slave.jar
-
-5 Give execute permissions to the slave.jar
+ ```
+ - Give execute permissions to the slave.jar
   chmod u+x slave.jar
-
-6 Create an empty folder that will be the workspace of jenkins
-  mkdir workspace
-
-7 Open the dashboard of Jenkins
-  
-8 Click on Manage Jenkins--->Click on Manage Nodes and Clouds
-
-9 Click on New node---->Enter some node name as Slave1
-
-10 Select Permanant Agent--->OK
-
-12 Enter remote root directory as /home/ubuntu/workspace
-
-13 Labels: myslave (This label is associated with a job in jenkins
-   and then that job will run on that slave)
-
-14 Go to Launch Method and select "Launch agent via execution of command on master"
-
-15 Click on Save
-
-16 Go to the dashboard of Jenkins
-
-17 Go to the job that we want to run on slave---->Click on Configure
-
-18 Go to General section
-
-19 Check restrict where this project can be run
-
-20 Enter slave label as myslave
+ - Create an empty folder that will be the workspace of jenkins mkdir workspace
+3. Open the dashboard of Jenkins
+4. Click on Manage Jenkins--->Click on Manage Nodes and Clouds
+5. Click on New node---->Enter some node name as Slave1
+6. Select Permanant Agent--->OK
+7. Enter remote root directory as /home/ubuntu/workspace
+8. Labels: myslave (This label is associated with a job in jenkins and then that job will run on that slave)
+9. Go to Launch Method and select "Launch agent via execution of command on master"
+10. Click on Save
+11. Go to the dashboard of Jenkins
+12. Go to the job that we want to run on slave---->Click on Configure
+13. Go to General section
+14. Check restrict where this project can be run
+15. Enter slave label as myslave
 
 =============================================================================
 Day 7
