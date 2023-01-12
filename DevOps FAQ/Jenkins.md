@@ -120,7 +120,7 @@ these application servers from where testers can start accessing it.
   https://public_ip_of_prod:8080
 ```
 
-### 6. How to setup CI/CD pipeline in jenkins dashboard?
+### 6. How to setup CI/CD pipeline in jenkins free style project?
 1. **Continuous Download:**
 - Open the dashboard of Jenkins
 - Click on New item
@@ -395,41 +395,136 @@ This is used distribute the work load to additional linux servers called as slav
 14. Check restrict where this project can be run
 15. Enter slave label as myslave
 
-=============================================================================
-Day 7
-=============================================================================
-=====================================================================
-Pipeline as Code
-======================
-Implementing all the stages of CI-CD from the level of a Grrovy script
-file is called as Pipleine as Code.This groovy script files is called
-as Jenkinsfile and generally it is uploaded into the remote git server
-along with the application code.From the remote git server this JEnkinsfile
-will trigger all the stages of CI-CD
+### 10. What is Pipeline as Code?
+Implementing all the stages of CI-CD from the level of a Grrovy script file is called as Pipleine as Code. This groovy script files is called as Jenkinsfile and generally it is uploaded into the remote git server along with the application code. From the remote git server this Jenkinsfile will trigger all the stages of CI-CD.
+- Below is the Java based project CI/CD declarative pipeline groovy script.
 
-Advantages
-====================
-1 Since the stages of CI-CD are implemented from the level of code
-  it can perform version controlling on it ie it gives the team members
-  ability to edit and review the code and yet maintain multiple versions 
-  of jenkinsfile
+```
+pipeline {
+    agent {
+        label 'master'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the code...'
+                sh 'mvn clean install'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                sh 'mvn test'
+                junit 'target/surefire-reports/*.xml'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying to staging environment...'
+                sh './deploy.sh staging'
+            }
+        }
+        stage('Release') {
+            when {
+                branch 'master'
+            }
+            steps {
+                echo 'Deploying to production environment...'
+                sh './deploy.sh production'
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Pipeline completed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+            mail to: 'devops@example.com',
+            subject: "Pipeline failed",
+            body: "The pipeline failed. Check the logs for more information."
+        }
+    }
+}
+```
+This pipeline has four stages: Build, Test, Deploy and Release. The agent block specifies that the pipeline should run on the "master" agent.
+1. The Build stage runs the command mvn clean install to build the code.
+2. The Test stage runs the command mvn test to run the tests and parse the junit xml test result by junit 'target/surefire-reports/*.xml'
+3. The Deploy stage runs a shell script deploy.sh that deploys the code to the staging environment.
+4. The Release stage runs the same script deploy.sh but with a different argument production to deploy the code to the production environment, it will only run if the branch is master.
+5. The post block specifies actions to take after the pipeline completes, such as sending an email notification if the pipeline fails.
 
-2 Jenkinsfile can withstand planned and unplanned restarts of the Jenkins
-  master
+- Below is the C# based project CI/CD declarative pipeline groovy script.
+```
+pipeline {
+    agent {
+        label 'Windows'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the code...'
+                bat 'dotnet build'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                bat 'dotnet test --logger:"trx;LogFileName=testResults.trx"'
+                publishTestResults (testResults: '**/testResults.trx')
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying to staging environment...'
+                bat 'dotnet publish --configuration Release --output deploy'
+                bat 'xcopy deploy \\\\stagingServer\\webapp /s /e'
+            }
+        }
+        stage('Release') {
+            when {
+                branch 'master'
+            }
+            steps {
+                echo 'Deploying to production environment...'
+                bat 'xcopy deploy \\\\productionServer\\webapp /s /e'
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Pipeline completed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+            mail to: 'devops@example.com',
+            subject: "Pipeline failed",
+            body: "The pipeline failed. Check the logs for more information."
+        }
+    }
+}
+```
+This pipeline has the same stages as the previous example (Build, Test, Deploy, and Release), but the commands used are specific to a .NET environment.
+1. The agent block specifies that the pipeline should run on a Windows slave.
+2. The Build stage runs the command dotnet build to build the code.
+3. The Test stage runs the command dotnet test to run the tests and parse the test result by testResults.trx using publishTestResults (testResults: '**/testResults.trx')
+4. The Deploy stage runs dotnet publish command to create deployable package, and then uses xcopy command to copy the files to the staging server.
+5. The Release stage uses the same xcopy command to copy the files to the production server. It will only run if the branch is master.
+6. The post block specifies actions to take after the pipeline completes, such as sending an email notification if the pipeline fails.
 
-3 It can perform all stages of CI-CD with minumum number of plugins as
-  a result of which it give better perfromance than the free style projects
+### 11. What are the advantages of Pipeline as Code?
+1. Since the stages of CI-CD are implemented from the level of code it can perform version controlling on it ie it gives the team members ability to edit and review the code along with support for pipeline versioning in various commits and branches. 
+2. Jenkinsfile can withstand planned and unplanned restarts of the Jenkins master.
+3. It can perform all stages of CI-CD with minumum number of plugins as a result of which it give better perfromance than the free style projects.
+4. It can handle all the real time challanges like if conditions, errror handling etc.
 
-4 It can handle all the real time challanges like if conditions,
-  errror handling etc
+### 11. What are the different ways Pipeline as Code can be implemented in Jenkins?
+- Pipeline can be implemented in 2 ways
+ 1. Scripted Pipeline
+ 2. Declarative Pipeline
 
-
-Pipeline can be implemented in 2 ways
-1 Scripted Pipeline
-2 Declarative Pipeline
-
-Syntax of Scripted Pipeline
-=================================
+- **Scripted Pipeline**
+```
 node('master')
 {
    stage('Stage name in CI-CD')
@@ -437,10 +532,9 @@ node('master')
        Groovy script code for implementing this stage
    }
 }
-
-
-Syntax of Declarative Pipeline
-====================================
+```
+- **Declarative Pipeline**
+```
 pipeline
 {
    agent any
@@ -455,7 +549,7 @@ pipeline
       }
    }
 }
-
+```
 ============================================================================
 Scripted Pipeline Code
 ==========================
