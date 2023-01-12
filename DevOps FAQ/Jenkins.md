@@ -247,9 +247,9 @@ Development job should be linked with the Testing job so that after all the stag
 - Apply--->Save
 
  
-### 7. What are the alternate ways of setting up Jenkins?
+### 7. What are the alternate ways of installing Jenkins?
 
-1. Using apt or yum repository in Linux
+1. **Using apt or yum repository in Linux**
  - Update the apt reposiotry and install java
   ```
   sudo apt-get update
@@ -270,27 +270,44 @@ Development job should be linked with the Testing job so that after all the stag
  - Install jenkins
   sudo apt-get install -y jenkins
 
-2. Setup of Jenkins on tomcat
-
-1 Update the apt repository
+2. **Setup of Jenkins on tomcat**
+ - Update the apt repository
+ ```
   sudo apt-get update
-
-2 Install tomcat9 and tomcat9-admin
+ ```
+ - Install tomcat9 and tomcat9-admin
+ ```
   sudo apt-get install -y tomcat9 tomcat9-admin
-
-3 Download the jenkins.war
+ ```
+   - Download the jenkins.war
+  ```
   wget https://get.jenkins.io/war-stable/2.249.1/jenkins.war
-
-4 Give wirite permisssions to other on tomcat9 folder
+  ```
+  - Give wirite permisssions to other on tomcat9 folder
+  ```
   sudo chmod o+w -R /var/lib/tomcat9
-
-5 Copy this war into jenkins
+  ```
+ - Copy this war into jenkins
+  ```
   cp jenkins.war /var/lib/tomcat9/webapps
-
-6 To access tomcat from browser
+  ```
+ - To access tomcat from browser
+  ```
   public_ip:8080
-  To access jenkins
+  ```
+ - To access jenkins
+ ```
   public_ip:8080/jenkins
+ ```
+
+3. **Setup of Jenkins in Docker**
+```
+docker images
+docker run -d --name jenkins -p 8080:80 jenkins/jenkins
+docker ps
+docker images
+curl http://localhost:8080
+```
 
 ====================================================================
 User Administration in Jenkins
