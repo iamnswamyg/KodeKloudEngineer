@@ -39,7 +39,7 @@ Continuous Deployment (CD)
 2. Release: The process of deploying the code to the production environment, where it is made available to end-users.
 3. Monitor: The process of monitoring the application and infrastructure in production, to ensure that they are working as expected and to identify and resolve any issues that may arise.
 
-### 5. Elaborate the stages in CI-CD pipeline?
+### 5. Ca you elaborate the stages in CI-CD pipeline?
 1. Continuous Download: Developers create some code and upload that code into the version controlling system.The moment code is uplaoded CI/CD tool(ex: Jenkins) gets a notification and it will download that code. This step is called Continuous Download.
 2. Continuous Build: The code downloaded in the previous stage has to converted into an artifact. This artifact can come in the format of war,jar,ear,exe file etc.To convert the code into an artifact jenkins takes the help of centain build tools like
 ANT,Maven,MsBuild etc.
@@ -47,9 +47,9 @@ ANT,Maven,MsBuild etc.
 these application servers from where testers can start accessing it.
 4. Continuous Testing: Jenkins now executes the automation test scripts created by the testers and check if the application is working according to the clients requirement. If it doesn't, Jenkins will send email notifications to the concerned team members and developers will fix the defects and upload the modified code into the version controlling system.Jenkins will now start from stage 1.
 5. Continuous Delivery: If testing passes Jenkins will now take approvals from the delivery team and deploy the artifact into the prod environment where the end user can start accessing it.
-6. Continous Monitoring:?
+6. Continuous monitoring:  The process of constantly monitoring the various stages of the software development lifecycle, such as code development, testing, and deployment. This allows teams to quickly identify and address any issues that arise, ensuring that the software is of high quality and ready for release. It also helps in tracking the performance of the software, and identifying potential bottlenecks or security vulnerabilities.
 
-### 5. Setup Sample CI/CD using Jenkins, QA and Prod Servers.
+### 5. How to setup CI/CD using Jenkins, QA and Prod Servers in AWS?
 1. **Setup of Jenkins** 
 - Create 3 AWS "ubuntu 20" instances 
 - Name the first one as Jenkins second as QAServer and third as ProdServer 
@@ -120,7 +120,7 @@ these application servers from where testers can start accessing it.
   https://public_ip_of_prod:8080
 ```
 
-### 5. Graphical Setup of CI/CD in Jenkis
+### 6. How to setup CI/CD pipeline in jenkins dashboard?
 1. **Continuous Download:**
 - Open the dashboard of Jenkins
 - Click on New item
@@ -247,34 +247,31 @@ Development job should be linked with the Testing job so that after all the stag
 - Apply--->Save
 
  
+### 7. What are the alternate ways of setting up Jenkins?
 
-
-=========================================================================
-Day 5
-=========================================================================
-Alternate ways of Setup of Jenkins
-==============================================
-1 Update the apt reposiotry and install java
+1. Using apt or yum repository in Linux
+ - Update the apt reposiotry and install java
+  ```
   sudo apt-get update
   sudo apt-get install -y openjdk-8-jdk
-
-2 Add the jenkins repository key to the apt repository
-  wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key 
-                                                     | sudo apt-key add -
-
-3 Add the debain repository address to jenkins.list file
-  sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > 
-                                     /etc/apt/sources.list.d/jenkins.list'
-
-4 Update the apt repository
+  ```
+ - Add the jenkins repository key to the apt repository
+ ```
+  wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+```
+ - Add the debain repository address to jenkins.list file
+```
+  sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+```                                     
+ - Update the apt repository
+  ```
   sudo apt-get update
-
-5 Install jenkins
+  ```
+ - Install jenkins
   sudo apt-get install -y jenkins
 
-========================================================================
-Setup of Jenkins on tomcat
-==============================
+2. Setup of Jenkins on tomcat
+
 1 Update the apt repository
   sudo apt-get update
 
