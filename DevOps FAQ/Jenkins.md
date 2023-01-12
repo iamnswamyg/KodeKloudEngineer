@@ -966,7 +966,7 @@ pipeline {
 ```
 
 ### 17. Give an example for using docker containers as agents?
- 1. Create a specific node as agent.
+ 1. Create a specific ncontainer as agent.
 ```
 pipeline {
   agent {
@@ -981,7 +981,7 @@ pipeline {
   }
 }
 ```
-2. Create an agent specific to stage
+2. Create an container agent specific to stage
 ```
 pipeline {
   agent none
@@ -1005,7 +1005,7 @@ pipeline {
   }
 }
 ```
-3. With dockerfile in the repository
+3. With dockerfile as agent in the repository
  - **jenkinsfile**
 ```
 pipeline {
