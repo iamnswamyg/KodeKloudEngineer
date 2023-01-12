@@ -350,7 +350,7 @@ If we login into jenkins as user1 we can access only the development related job
 ### 9. What is Master Slave Architecture of Jenkins and How do we setup it?
 This is used distribute the work load to additional linux servers called as slaves. This is used when we want to run multiple jobs on jenkins parallelly.
 
-1. Setup
+1. **Setup**
  - Create a new AWS ubuntu20 instance
 
  - Install the same version of java as present in the master
@@ -373,7 +373,7 @@ This is used distribute the work load to additional linux servers called as slav
      ssh-copy-id ubuntu@private_ip_of_slave
  
  ```
-2. Connect to slave using git bash
+2. **Connect to slave using git bash**
  - Downlaod the slave.jar file
  ```
   wget http://private_ip_of_jenkinsserver:8080/jnlpJars/slave.jar
