@@ -282,8 +282,8 @@ Run ‘terraform init’ with ‘-upgrade’ option. This command rechecks the r
 We can export data from a module by defining output blocks in the module configuration files. This data can then be transferred as a parameter to the destination module.
 
 ### 52. How will you make an object of one module available for the other module at a high level?
-# lower-level module
 ```
+# lower-level module
 output "example_object" {
   value = var.example_object
 }
@@ -311,8 +311,8 @@ Terraform has built-in dependency management. Terraform has two kinds of depende
 I need to recommit the previous code version to be the new and current version in my VCS. This would trigger as terraform run, which would be responsible for running the old code. As Terraform is more declarative, I will make sure all things in the code roll back to the old code. I would use the State Rollback Feature of Terraform Enterprise to roll back to the latest state if the state file got corrupted.
 
 ### 55. What is DataSource?
-```
 Data sources allow Terraform to use information defined outside of Terraform, defined by another separate Terraform configuration, or modified by functions. A data source is accessed via a special kind of resource known as a data resource, declared using a data block.
+```
 data "aws_ami" "example" {
   most_recent = true
 
