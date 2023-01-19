@@ -193,17 +193,3 @@ Another example of DevSecOps might be implementing security controls and monitor
 
 By incorporating security into the development, testing, and deployment process, organizations can improve the security of their applications and infrastructure and reduce the risk of security breaches.
 
-### 17. what are the components of Kubernetes?
-Kubernetes is an open-source container orchestration platform that automates the management and deployment of containerized applications. It consists of a number of components that work together to provide the desired functionality. Here are the key components of Kubernetes:
-1. Kubelet: The kubelet is a daemon that runs on each node in the cluster and is responsible for communicating with the control plane and ensuring that containers are running as intended on the node.
-2. API Server: The API server is the central control plane component of Kubernetes and is responsible for exposing the API that is used to interact with the cluster.
-3. etcd: etcd is a distributed key-value store that is used by Kubernetes to store the cluster's configuration data.
-4. Scheduler: The scheduler is a component of Kubernetes that is responsible for assigning pods (groups of containers) to nodes in the cluster.
-5. Controller Manager: The controller manager is a daemon that runs various controllers that are responsible for maintaining the desired state of the cluster, such as replicasets and deployments.
-6. kubectl: kubectl is the command-line interface (CLI) for interacting with a Kubernetes cluster.
-7. kube-proxy: The kube-proxy is a daemon that runs on each node in the cluster and is responsible for implementing the network proxying and load balancing functionality of Kubernetes.
-8. Container runtime: The container runtime is the software that is responsible for running containers on the nodes in the cluster. Examples of container runtimes include Docker and containerd.
-
-### 18. 
-
-
